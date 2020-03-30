@@ -19,7 +19,7 @@ namespace AmiamStore
     {
         public static PaymentManager _paymentManager = new PaymentManager();
 
-        [WebMethod]
+        [WebMethod]//push
         public double DiscountForMasterCardClients(string holderName, string creditCardNumber, string cvv, string expirityDate, double amountToPay)
         {
             if (_paymentManager.IsMasterCardHolder(creditCardNumber) && _paymentManager.Pay(holderName, creditCardNumber, cvv, expirityDate, amountToPay))
