@@ -20,32 +20,33 @@ namespace AmiamStore
         public static PaymentManager _paymentManager = new PaymentManager();
 
         [WebMethod]//push
-        public double DiscountForMasterCardClients(string holderName, string creditCardNumber, string cvv, string expirityDate, double amountToPay)
-        {
-            if (_paymentManager.IsMasterCardHolder(creditCardNumber) && _paymentManager.Pay(holderName, creditCardNumber, cvv, expirityDate, amountToPay))
-            {
-                double UpdatedAmountToPay = ((amountToPay * 100) / 10);
-                return UpdatedAmountToPay;
-            }
-            else
-                return -1;
-        }
-    }
-
-    public class PaymentManager
-    {
-        private List<PaymentMethod> _paymentMethods = new List<PaymentMethod>();
-
         public bool Pay(string holderName, string creditCardNumber, string cvv, string expirityDate, double amountToCharge)
         {
             PaymentMethod o = new PaymentMethod(holderName, creditCardNumber, cvv, expirityDate);
             List<PaymentMethod> payments = new List<PaymentMethod>();
             string month = expirityDate.Substring(0, 2);
             string year = expirityDate.Substring(4, 3);
-            if (cvv.Length == 3 && creditCardNumber.Length == 19 && int.Parse(month) > 0 && int.Parse(month) <= 12 && int.Parse(year) > 20)
+            if (cvv.Length == 3 && creditCardNumber.Length == 16 && int.Parse(month) > 0 && int.Parse(month) <= 12 && int.Parse(year) > 20)
                 return true;
             return false;
         }
+
+        //public double DiscountForMasterCardClients(string holderName, string creditCardNumber, string cvv, string expirityDate, double amountToPay)
+        //{
+        //    if (_paymentManager.IsMasterCardHolder(creditCardNumber) && Pay(holderName, creditCardNumber, cvv, expirityDate, amountToPay))
+        //    {
+        //        double UpdatedAmountToPay = ((amountToPay * 100) / 10);
+        //        return UpdatedAmountToPay;
+        //    }
+        //    else
+        //        return -1;
+        //}
+    }
+
+    public class PaymentManager
+    {
+        private List<PaymentMethod> _paymentMethods = new List<PaymentMethod>();
+
         public bool IsMasterCardHolder(string creditCardNumber)
         {
          if(CheckIfCreditCardNumberVerify(creditCardNumber))

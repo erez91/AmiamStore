@@ -11,9 +11,13 @@ namespace AmiamStore.HtmlHelpers
     {
         public static CurrentUser GetCurrentUser(this HtmlHelper htmlHelper)
         {
-            var manager = new AuthenticationManager();
+            var manager = new AthenticationManager();
             return manager.GetUser();
         }
-
+        public static int GetCustomerID(this HtmlHelper htmlHelper)
+        {
+            var manager = new AthenticationManager();
+            return (int)manager.GetUser().UserID;
+        }
     }
 }

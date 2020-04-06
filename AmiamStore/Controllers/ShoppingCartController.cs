@@ -1,15 +1,21 @@
-﻿using AmiamStore.App_BLL;
-using AmiamStore.Models;
+﻿using AmiamStore.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using AmiamStore.App_DAL;
+using System.Net.Mail;
+using AmiamStore.App_BLL.Entities;
+using System.Reflection;
+using AmiamStore.App_BLL;
+
 namespace AmiamStore.Controllers
 {
     public class ShoppingCartController : Controller
     {
+        OrderRepository Order = new OrderRepository();
+        AthenticationManager manger = new AthenticationManager();
         ProductBLL bll = new ProductBLL();
         private string strCart = "Cart";
         
@@ -18,20 +24,29 @@ namespace AmiamStore.Controllers
         public ActionResult CartView()
         {
             CartViewModel model = new CartViewModel();
+            if (manger.GetUser().UserID != null)
+            {
+                model.CustomerID = (int)manger.GetUser().UserID;
+                model.OrderID = (Order.GetLastOrderID()) + 1;
+            }
             model.Products = GetCart();
             model.OrderAmount = GetAmountToCharge();
             return View(model);
         }
         [HttpPost]
         public ActionResult CartView(CartViewModel c)
-        {     
+        {
+            if (manger.GetUser().UserID != null)
+            {
+                c.CustomerID = (int)manger.GetUser().UserID;
+                c.OrderID = (Order.GetLastOrderID()) + 1;
+            }
             var paymentWebService = new PaymentServiceReference.PaymentWebServiceSoapClient();
             bool p = paymentWebService.Pay(c.CardHolder, c.CreditCardNumber, c.Cvv, c.ExpiryDate, GetAmountToCharge());
             if (p == true)
             {
                 PaymentRepository Repository = new PaymentRepository();
                 Repository.Insert(c);
-                OrderRepository Order = new OrderRepository();
                 CartViewModel model = new CartViewModel();
                 model.Products = GetCart();
                 model.OrderAmount = GetAmountToCharge();

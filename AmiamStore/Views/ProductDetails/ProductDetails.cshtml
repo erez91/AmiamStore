@@ -11,48 +11,6 @@
     var data = ViewBag.Message;
 }
 @{ var currentUser = Html.GetCurrentUser();}
-
-@if (currentUser != null && currentUser.UserType == AmiamStore.App_BLL.UserType.Manager)
-{
-    <div class="boxProduct">
-        <div class="ProductDetails">
-            <textarea class="titleLuminous" rows="2" cols="10">@data.ProductName</textarea>
-            <textarea class="ProductPrice" rows="2" cols="5">
-                ₪@data.ProductPrice
-            </textarea>
-            @*<div class="addToShoppingCart">
-                    <button class="ShoppingButProduct1">
-                        <i class="fas fa-shopping-bag"></i>
-                        <span class="text">הוספה לסל</span>
-                    </button>
-                </div>*@
-            <span class="text">
-                @Html.ActionLink("הוספה לסל", "ProductsPage", "ProductsPage", new { id = data.CategoryId, productId = data.ProductID }, new { @class = "my-class" })
-            </span>
-            <div class="CatagoryTitle">
-                :קטגוריה
-            </div>
-            <a href="../SafteyProducts/SafteyProductsPage" class="Catagory">
-                מוצרי בטיחות
-            </a>
-            <div class="Description">
-                <div class="DescriptionTitle">
-                    תיאור
-                </div>
-                <textarea class="inputDescription" rows="13" cols="70">
-
-                    @data.ProductDescription
-
-                </textarea>
-            </div>
-        </div>
-        <div class="ProductImage">
-            <img class="image" src="\Images\@data.ProductImage">
-        </div>
-    </div>
-}
-else
-{
     <div class="boxProduct">
         <div class="ProductDetails">
             <h1 class="titleLuminous">
@@ -69,7 +27,7 @@ else
             <div class="CatagoryTitle">
                 :קטגוריה
             </div>
-                @Html.ActionLink(@Model.Products.First().CatagoryName, "ProductsPage", "ProductsPage", new { id = Model.Products.First().CategoryId, productId = Model.Products.First().ProductID }, new { @class = "But" })
+            @Html.ActionLink(Model.Products.First().CatagoryName, "ProductsPage", "ProductsPage", new { id = Model.Products.First().CategoryId, productId = Model.Products.First().ProductID }, new { @class = "But" })
             <div class="Description">
                 <div class="DescriptionTitle">
                     תיאור
@@ -85,7 +43,30 @@ else
             <img class="image" src="\Images\@Model.Products.First().ProductImage">
         </div>
     </div>
-}
+
+    <div>
+        @foreach (var product in Model.FiveRandomProducts)
+        {
+            <div class="Product">
+
+                <a href="/ProductDetails/ProductDetails/@product.ProductID"><img class="img" style="width:300px" src="\Images\@product.ProductImage"></a>
+                <div class="ProductTitle">
+                    @product.ProductName
+                </div>
+                <br />
+                <div class="ProductPrice">
+                    ₪@product.ProductPrice
+                </div>
+                <i class="fas fa-shopping-bag"></i>
+                <span class="text">
+                    @Html.ActionLink("הוספה לסל", "ProductsPage", "ProductsPage", new { id = product.CategoryId, productId = product.ProductID }, new { @class = "ShoppingBut" })
+                </span>
+                <br />
+            </div>
+        }
+    </div>
+
+
 
 @*<div class="RelatedProducts">
         <div class="RelatedProductsLine">

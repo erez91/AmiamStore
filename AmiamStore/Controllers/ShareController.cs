@@ -18,7 +18,6 @@ namespace AmiamStore.Controllers
         [HttpGet]
         public ActionResult SearchBox()
         {
-
             return View();
         }
         public List<ProductModel> ConvertDataTableToList(string ProductSerch)

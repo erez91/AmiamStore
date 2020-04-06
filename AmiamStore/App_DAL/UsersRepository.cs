@@ -29,8 +29,8 @@ namespace AmiamStore.App_DAL
         }
         public void Insert(User user)
         {
-            var query = string.Format(@"INSERT INTO Users (UserName, [Password], UserType) VALUES ('{0}','{1}',{2});",
-                user.Username, user.Password, user.UserType
+            var query = string.Format(@"INSERT INTO Users (UserName, [Password], UserType , UserID) VALUES ('{0}','{1}',{2} ,'{3}');",
+                user.Username, user.Password, user.UserType , user.UserID
                 );
             _dbHeloer.ExecuteNonQuery(query);
         }

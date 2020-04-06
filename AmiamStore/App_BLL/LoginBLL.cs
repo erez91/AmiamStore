@@ -24,6 +24,7 @@ namespace AmiamStore.App_BLL
                 d.Username = dr["UserName"].ToString();
                 d.Password = dr["Password"].ToString();
                 d.UserType = (int)dr["UserType"];
+                d.UserID = (int)dr["UserID"];
                 listUsers.Add(d);
             }
             return listUsers;

@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css">
 <link rel="stylesheet" href="styles.css">
 
-@{ var currentUser = Html.GetCurrentUser(); }
+@{ var currentUser = Html.GetCurrentUser();}
 @if (currentUser == null)
 {
     <div class="Box">
@@ -68,12 +68,13 @@ else
                 <h2>Payment Gateway</h2>
                 @using (Html.BeginForm())
                 {
+                    @*@Html.HiddenFor(item => item.Customer.CustomerID = Html.GetCustomerID())*@
                     <div class="form">
                         <div class="card space icon-relative">
                             <label class="label">Card holder:</label>
                             @Html.TextBoxFor(m => m.CardHolder, new { placeholder = "Full Name", @class = "input" })
                             <i class="fas fa-user"></i>
-                            @Html.ValidationMessageFor(m=>m.CardHolder)
+                            @Html.ValidationMessageFor(m => m.CardHolder)
                         </div>
                         <div class="card space icon-relative">
                             <label class="label">Card number:</label>
