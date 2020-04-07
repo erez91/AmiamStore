@@ -10,12 +10,12 @@ namespace AmiamStore.PaymentApp_DAL
 {
     public class ChargesRepository
     {
-        private readonly DBHelper _dbHelper = new DBHelper("Payment");
+        private readonly DBHelper _dbHelper = new DBHelper("Payment.accdb");
 
         public DataTable GetCharges()
         {
             string sql =
-              @" SELECT Charges.CreditCardNumber, Charges.AmountToCharge, Charges.StoreName
+              @" SELECT Charges.CreditCardNumber,Charges.StoreName , Charges.ProductName, Charges.ProductPrice
                  FROM Charges;";
             DataTable dt = _dbHelper.GetData(sql);
             return dt;
@@ -23,10 +23,12 @@ namespace AmiamStore.PaymentApp_DAL
 
         public void InsertCharge(Charge Charge)
         {
-            var query = string.Format(@"INSERT INTO Customers (CreditCardNumber, AmountToCharge, StoreName) VALUES ('{0}', '{1}', '{2}')",
+            var query = string.Format(@"INSERT INTO Customers (CreditCardNumber, AmountToCharge, StoreName , ProductName , ProductPrice) VALUES ('{0}', '{1}', '{2}' , '{3}' , '{4}')",
                 Charge.CreditCardNumber,
                 Charge.AmountToCharge,
-                Charge.StoreName
+                Charge.StoreName,
+                Charge.ProductName,
+                Charge.ProductPrice
                 );
             _dbHelper.ExecuteNonQuery(query);
         }

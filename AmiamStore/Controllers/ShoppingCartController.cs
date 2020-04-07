@@ -6,11 +6,15 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using AmiamStore.App_DAL;
+using AmiamStore.PaymentApp_DAL.Entities;
+using AmiamStore.PaymentApp_DAL;
+
 namespace AmiamStore.Controllers
 {
     public class ShoppingCartController : Controller
     {
         ProductBLL bll = new ProductBLL();
+        AuthenticationManager manger = new AuthenticationManager();
         private string strCart = "Cart";
         
         [HttpGet]
@@ -24,13 +28,18 @@ namespace AmiamStore.Controllers
         }
         [HttpPost]
         public ActionResult CartView(CartViewModel c)
-        {     
-            var paymentWebService = new PaymentServiceReference.PaymentWebServiceSoapClient();
-            bool p = paymentWebService.Pay(c.CardHolder, c.CreditCardNumber, c.Cvv, c.ExpiryDate, GetAmountToCharge());
+        {
+            var user = manger.GetUser();
+            var paymentWebService = new payWebService();
+            List<Charge> list = new List<Charge>();
+            c.Products = GetCart();
+            bool p = paymentWebService.ConfirmPay(c.CardHolder, c.CreditCardNumber, c.Cvv, c.ExpiryDate, GetAmountToCharge() , user.UserName , c.Products);
             if (p == true)
             {
-                PaymentRepository Repository = new PaymentRepository();
-                Repository.Insert(c);
+                CreditCardRepository Repository = new CreditCardRepository();
+                //CreditCard credit = new CreditCard();
+                //credit.CardHolder = c.CardHolder;credit.CreditCardNumber = c.CreditCardNumber;credit.CVV = c.Cvv;credit.ExpiryDate = c.ExpiryDate;credit.LineOfCredit = c.LineOfBalance;
+                //Repository.InsertCredit(credit);
                 OrderRepository Order = new OrderRepository();
                 CartViewModel model = new CartViewModel();
                 model.Products = GetCart();

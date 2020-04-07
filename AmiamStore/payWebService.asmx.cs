@@ -8,6 +8,8 @@ using System.Web;
 using System.Web.Services;
 using System.Net;
 using System.Net.Mail;
+using AmiamStore.Models;
+using System.ComponentModel;
 
 namespace AmiamStore
 {
@@ -24,14 +26,13 @@ namespace AmiamStore
             public static PaymentManager _paymentManager = new PaymentManager();
 
 
-            [WebMethod]//push
-            public bool ConfirmPay(string holderName, string creditCardNumber, string cvv, string expirityDate, int amountToCharge, List<Charge> list)
+            [WebMethod]
+            public bool ConfirmPay(string holderName, string creditCardNumber, string cvv, string expirityDate, double amountToCharge,string EmailTo, List<CartModel> products)
             {
                 if (ProperCardDetails(holderName, creditCardNumber, cvv, expirityDate, amountToCharge) && ClientHasEnoghMoney(holderName, amountToCharge))
                 {
                     amountToCharge = DiscountForMasterCardClients(creditCardNumber, amountToCharge);
-                    SendPurchaseClearanceOnEmail("liamivgi009@gmail.com", "liam ivgi");
-                    list = DetailtsOfAllInvites(creditCardNumber);
+                    SendPurchaseClearanceOnEmail(EmailTo , creditCardNumber , products);
                     return true;
                 }
                 return false;
@@ -39,83 +40,59 @@ namespace AmiamStore
 
 
 
-            [WebMethod]//push
-            public bool ProperCardDetails(string holderName, string creditCardNumber, string cvv, string expirityDate, int amountToCharge)
+            [WebMethod]
+            public bool ProperCardDetails(string holderName, string creditCardNumber, string cvv, string expirityDate, double amountToCharge)
             {
                 PaymentMethod o = new PaymentMethod(holderName, creditCardNumber, cvv, expirityDate);
                 List<PaymentMethod> payments = new List<PaymentMethod>();
                 string month = expirityDate.Substring(0, 2);
                 string year = expirityDate.Substring(4, 3);
-                if (cvv.Length == 3 && creditCardNumber.Length == 19 && int.Parse(month) > 0 && int.Parse(month) <= 12 && int.Parse(year) > 20)
+                if (cvv.Length == 3 && creditCardNumber.Length == 16 || creditCardNumber.Length == 15 && int.Parse(month) > 0 && int.Parse(month) <= 12 && int.Parse(year) > 20)
                     return true;
                 return false;
             }
-            [WebMethod]//push
-            public int DiscountForMasterCardClients(string creditCardNumber, int amountToPay)
+            [WebMethod]
+            public double DiscountForMasterCardClients(string creditCardNumber, double amountToPay)
             {
                 if (_paymentManager.IsMasterCardHolder(creditCardNumber))
                 {
-                    int UpdatedAmountToPay = ((amountToPay * 100) / 10);
-                    return UpdatedAmountToPay;
+                    double UpdatedAmountToPay = ((amountToPay * 10) / 100);
+                    return (amountToPay - UpdatedAmountToPay);
                 }
                 else
                     return amountToPay;
             }
-            [WebMethod]//push
-            public bool ClientHasEnoghMoney(string holderName, int amountToPay)
+            [WebMethod]
+            public bool ClientHasEnoghMoney(string holderName, double amountToPay)
             {
                 if (_paymentManager.IfCardHolderExist(holderName) && _paymentManager.GetLineCard(holderName) > amountToPay)
                     return true;
                 return false;
             }
-
-            [WebMethod]//push
-            public List<Charge> DetailtsOfAllInvites(string creditCardNumber)
+            [WebMethod]
+            public void SendPurchaseClearanceOnEmail(string ToEmail ,string creditCardNumber , List<CartModel> products)
             {
-                ChargesRepository DAL = new ChargesRepository();
-                List<Charge> list = new List<Charge>();
-                DataTable dt = DAL.GetCharges();
-                foreach (DataRow dr in dt.Rows)
-                {
-                    if (creditCardNumber == dr["creditCardNumber"].ToString())
-                    {
-                        Charge ch = new Charge();
-                        ch.AmountToCharge = (int)dr["AmountToCharge"];
-                        ch.CreditCardNumber = dr["creditCardNumber"].ToString();
-                        ch.StoreName = dr["StoreName"].ToString();
-                        list.Add(ch);
-                    }
-                }
-                return list;
-            }
-            [WebMethod]//push
-            public void SendPurchaseClearanceOnEmail(string ToEmail, string ToName)
+            DataTable data_table = _paymentManager.DetailtsOfAllInvites(creditCardNumber , products);
+            string textBody = " <table border=" + 1 + " cellpadding=" + 0 + " cellspacing=" + 0 + " width = " + 400 + "><tr bgcolor='#4da6ff'><td><b> שם המוצר </b></td> <td> <b> מחיר </b> </td></tr>";
+            for (int loopCount = 0; loopCount < data_table.Rows.Count; loopCount++)
             {
-                var fromAddress = new MailAddress("AmiamStore@gmail.com", "Amiam Store");
-                var toAddress = new MailAddress(ToEmail, ToName);
-                const string fromPassword = "vm0547788384";
-                const string subject = "Subject";
-                const string body = "Body";
-
-                var smtp = new SmtpClient
-                {
-                    Host = "smtp.gmail.com",
-                    Port = 587,
-                    EnableSsl = true,
-                    DeliveryMethod = SmtpDeliveryMethod.Network,
-                    UseDefaultCredentials = false,
-                    Credentials = new NetworkCredential(fromAddress.Address, fromPassword)
-                };
-                using (var message = new MailMessage(fromAddress, toAddress)
-                {
-                    Subject = subject,
-                    Body = body
-                })
-                {
-                    smtp.Send(message);
-                }
+                textBody += "<tr><td>" + data_table.Rows[loopCount]["שם המוצר"] + "</td><td> " + data_table.Rows[loopCount]["מחיר המוצר"] + "</td> </tr>";
             }
-        
+            textBody += "</table>";
+            MailMessage mail = new MailMessage();
+            System.Net.Mail.SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
+
+            mail.From = new MailAddress("AmiamStore@gmail.com");
+            mail.To.Add(ToEmail);
+            mail.Subject = "Thank you for buying in Amiam WebSite";
+            mail.Body = textBody;
+            mail.IsBodyHtml = true;
+            SmtpServer.Port = 587;
+            SmtpServer.Credentials = new System.Net.NetworkCredential("AmiamStore@gmail.com", "vm0547788384");
+            SmtpServer.EnableSsl = true;
+
+            SmtpServer.Send(mail);
+        }
 
         public class PaymentManager
         {
@@ -157,6 +134,47 @@ namespace AmiamStore
                 }
                 return 0;
             }
+            public DataTable ConvertListToDatatable(List<CartModel> products)
+            {
+                PropertyDescriptorCollection properties =
+                TypeDescriptor.GetProperties(typeof(CartModel));
+                DataTable table = new DataTable();
+                int index = 1;
+                foreach (PropertyDescriptor prop in properties)
+                    table.Columns.Add(prop.Name);
+                foreach (CartModel item in products)
+                {
+                    DataRow row = table.NewRow();
+                    foreach (PropertyDescriptor prop in properties)
+                    {
+                        if (index % 2 != 0)
+                            row[prop.Name] = item.product.ProductName;
+                        if (index % 2 == 0)
+                            row[prop.Name] = item.product.ProductPrice;
+                        index++;
+                    }
+                    table.Rows.Add(row);
+                }
+                return table;
+            }
+            public DataTable DetailtsOfAllInvites(string creditCardNumber, List<CartModel> products)
+            {
+                DataTable dt = ConvertListToDatatable(products);
+                int index = 0;
+                DataTable NewDt = new DataTable();
+                NewDt.Columns.Add("שם המוצר");
+                NewDt.Columns.Add("מחיר המוצר");
+                foreach (DataRow dr in dt.Rows)
+                {
+                    DataRow toInsert = NewDt.NewRow();
+                    toInsert["שם המוצר"] = dr["product"].ToString();
+                    toInsert["מחיר המוצר"] = dr["Quantity"].ToString();
+                    NewDt.Rows.InsertAt(toInsert, index);
+                    index++;
+                }
+                return NewDt;
+            }
+
         }
         public class PaymentMethod
         {

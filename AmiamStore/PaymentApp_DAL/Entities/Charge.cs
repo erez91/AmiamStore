@@ -10,5 +10,7 @@ namespace AmiamStore.PaymentApp_DAL.Entities
         public string CreditCardNumber { get; set; }
         public int AmountToCharge { get; set; }
         public string StoreName { get; set; }
+        public string ProductName { get; set; }
+        public double ProductPrice { get; set; }
     }
 }

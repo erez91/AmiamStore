@@ -10,7 +10,7 @@ namespace AmiamStore.PaymentApp_DAL
 {
     public class CreditCardRepository
     {
-        private readonly DBHelper _dbHelper = new DBHelper("Payment");
+        private readonly DBHelper _dbHelper = new DBHelper("Payment.accdb");
 
         public DataTable GetCreditCards()
         {

@@ -34,6 +34,7 @@ namespace AmiamStore.Models
         [Required(ErrorMessage = "Expiry Date is mandatory.")]
         public string ExpiryDate { get; set; }
         //public int UserID { get; set; }
+        public int LineOfBalance { get; set; }
 
         public List<CartModel> Products { get; set; }
 
