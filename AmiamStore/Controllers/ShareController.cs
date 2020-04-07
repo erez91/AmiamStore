@@ -15,7 +15,6 @@ namespace AmiamStore.Controllers
     {
         public ShareController() : base(false) { }
         // GET: Share
-        [HttpGet]
         public ActionResult SearchBox()
         {
 
