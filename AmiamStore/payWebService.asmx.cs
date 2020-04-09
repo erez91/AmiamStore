@@ -25,13 +25,15 @@ namespace AmiamStore
     {
             public static PaymentManager _paymentManager = new PaymentManager();
 
+        CreditCardRepository DAL = new CreditCardRepository();
 
-            [WebMethod]
+        [WebMethod]
             public bool ConfirmPay(string holderName, string creditCardNumber, string cvv, string expirityDate, double amountToCharge,string EmailTo, List<CartModel> products)
             {
-                if (ProperCardDetails(holderName, creditCardNumber, cvv, expirityDate, amountToCharge) && ClientHasEnoghMoney(holderName, amountToCharge))
+                if (ProperCardDetails(holderName, creditCardNumber, cvv, expirityDate, amountToCharge) && ClientHasEnoghMoney(holderName,amountToCharge,cvv,expirityDate,creditCardNumber))
                 {
                     amountToCharge = DiscountForMasterCardClients(creditCardNumber, amountToCharge);
+                    DAL.UpdateLine(amountToCharge, holderName, creditCardNumber, cvv, expirityDate);
                     SendPurchaseClearanceOnEmail(EmailTo , creditCardNumber , products);
                     return true;
                 }
@@ -43,8 +45,6 @@ namespace AmiamStore
             [WebMethod]
             public bool ProperCardDetails(string holderName, string creditCardNumber, string cvv, string expirityDate, double amountToCharge)
             {
-                PaymentMethod o = new PaymentMethod(holderName, creditCardNumber, cvv, expirityDate);
-                List<PaymentMethod> payments = new List<PaymentMethod>();
                 string month = expirityDate.Substring(0, 2);
                 string year = expirityDate.Substring(4, 3);
                 if (cvv.Length == 3 && creditCardNumber.Length == 16 || creditCardNumber.Length == 15 && int.Parse(month) > 0 && int.Parse(month) <= 12 && int.Parse(year) > 20)
@@ -63,10 +63,24 @@ namespace AmiamStore
                     return amountToPay;
             }
             [WebMethod]
-            public bool ClientHasEnoghMoney(string holderName, double amountToPay)
+            public bool ClientHasEnoghMoney(string holderName, double amountToPay , string cvv , string expirty , string creditCardNumber)
             {
-                if (_paymentManager.IfCardHolderExist(holderName) && _paymentManager.GetLineCard(holderName) > amountToPay)
+            CreditCardRepository Repository = new CreditCardRepository();
+            if (!_paymentManager.IfCardHolderExist(holderName))
+            {
+                _paymentManager.InsertIfHolderNotExist(holderName, creditCardNumber, cvv, expirty);
+                if (_paymentManager.GetLineCard(holderName) > amountToPay)
+                {
                     return true;
+                }
+
+            }
+            if (_paymentManager.GetLineCard(holderName) > amountToPay)
+            {
+                Repository.UpdateLine(amountToPay, holderName, creditCardNumber,cvv,expirty);
+                return true;
+            }
+            else
                 return false;
             }
             [WebMethod]
@@ -84,7 +98,7 @@ namespace AmiamStore
 
             mail.From = new MailAddress("AmiamStore@gmail.com");
             mail.To.Add(ToEmail);
-            mail.Subject = "Thank you for buying in Amiam WebSite";
+            mail.Subject = "Thank you for buying on Amiam Marketing website";
             mail.Body = textBody;
             mail.IsBodyHtml = true;
             SmtpServer.Port = 587;
@@ -96,7 +110,8 @@ namespace AmiamStore
 
         public class PaymentManager
         {
-            private List<PaymentMethod> _paymentMethods = new List<PaymentMethod>();
+
+            CreditCardRepository DAL = new CreditCardRepository();
 
             public bool IsMasterCardHolder(string creditCardNumber)
             {
@@ -114,7 +129,6 @@ namespace AmiamStore
             }
             public bool IfCardHolderExist(string CardHolderName)
             {
-                CreditCardRepository DAL = new CreditCardRepository();
                 DataTable dt = DAL.GetCreditCards();
                 foreach (DataRow dr in dt.Rows)
                 {
@@ -123,9 +137,18 @@ namespace AmiamStore
                 }
                 return false;
             }
+            public void InsertIfHolderNotExist(string holderName, string creditCardNumber, string cvv, string expirityDate)
+            {
+                CreditCard card = new CreditCard();
+                card.CardHolder = holderName;
+                card.CreditCardNumber = creditCardNumber;
+                card.CVV = cvv;
+                card.ExpiryDate = expirityDate;
+                card.LineOfCredit = 1000;//כל לקוח חדש במערכת מקבל גבול של עד מאה שקלים
+                DAL.InsertCredit(card);
+            }
             public int GetLineCard(string CardHolder)
             {
-                CreditCardRepository DAL = new CreditCardRepository();
                 DataTable dt = DAL.GetCreditCards();
                 foreach (DataRow dr in dt.Rows)
                 {

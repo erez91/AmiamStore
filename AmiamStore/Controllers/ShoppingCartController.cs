@@ -36,15 +36,12 @@ namespace AmiamStore.Controllers
             bool p = paymentWebService.ConfirmPay(c.CardHolder, c.CreditCardNumber, c.Cvv, c.ExpiryDate, GetAmountToCharge() , user.UserName , c.Products);
             if (p == true)
             {
-                CreditCardRepository Repository = new CreditCardRepository();
-                //CreditCard credit = new CreditCard();
-                //credit.CardHolder = c.CardHolder;credit.CreditCardNumber = c.CreditCardNumber;credit.CVV = c.Cvv;credit.ExpiryDate = c.ExpiryDate;credit.LineOfCredit = c.LineOfBalance;
-                //Repository.InsertCredit(credit);
                 OrderRepository Order = new OrderRepository();
                 CartViewModel model = new CartViewModel();
                 model.Products = GetCart();
                 model.OrderAmount = GetAmountToCharge();
                 Order.Insert(model);
+                Session.Clear();
                 return RedirectToAction("OrderComplete");
             }
             return RedirectToAction("OrderFailed");
@@ -94,6 +91,5 @@ namespace AmiamStore.Controllers
             model.Products = listCart;
             return View("CartView" , model);
         }
-
     }
 }
