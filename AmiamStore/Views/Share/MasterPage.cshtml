@@ -63,7 +63,7 @@
     <div class="RenderBody">
         @RenderBody()
     </div>
-    <footer class="footer">
+    @*<footer class="footer">
         <div class="detailsFooter">
             <div class="FooterForm">
                 <form action="../Login/LoginPage" class="FormButtons">
@@ -88,6 +88,21 @@
                 <br />
                 amiam1@inter.net.il
             </div>
+        </div>
+    </footer>*@
+
+    <footer class="footerLinks">
+        <a class="Index" href="/Home/Index"><span>עמוד הבית</span></a>
+        @Html.ActionLink("ביגוד מקצועי", "ProductsPage", "ProductsPage", new { id = 1 }, new { @class = "Index" })
+        @Html.ActionLink("מוצרי בטיחות", "ProductsPage", "ProductsPage", new { id = 2 }, new { @class = "Index" })
+        @Html.ActionLink("כפפות עבודה", "ProductsPage", "ProductsPage", new { id = 3 }, new { @class = "Index" })
+        @Html.ActionLink("נעלי עבודה ובטיחות", "ProductsPage", "ProductsPage", new { id = 4 }, new { @class = "Index" })
+        <img class="SlashImage" src="~/Images/WhiteSlash.png" />
+        <a class="Icon" href="https://www.facebook.com/amiamltds">פייסבוק</a>
+        <a class="Icon" href="https://www.instagram.com/amiamltds/">אינסטגרם</a>
+        <img class="SlashImage" src="~/Images/WhiteSlash.png" />
+        <div class="spanFooter1">
+            Liam Ivgi 2020      ©
         </div>
     </footer>
 </body>

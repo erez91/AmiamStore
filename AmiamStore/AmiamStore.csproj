@@ -165,6 +165,7 @@
     <Content Include="Images\SafteyWorking.jpg" />
     <Content Include="Images\Serch.png" />
     <Content Include="Images\Products\ProfessionalClothingImages\ShortPoloShirt.png" />
+    <Content Include="Images\slash.png" />
     <Content Include="Images\slide4BlanstonImage.png" />
     <Content Include="Images\slide4GloveImage.png" />
     <Content Include="Images\Slide4ShoeImage.png" />
@@ -182,6 +183,7 @@
     <Content Include="Images\Products\WorkGlovesImages\ReinforcedGreenHouseholdWorkGloves.png" />
     <Content Include="Images\Products\WorkGlovesImages\ReinforcedWeldingWorkGloves.png" />
     <Content Include="Images\Products\WorkGlovesImages\WorkingGlovesT-Manjit.png" />
+    <Content Include="Images\WhiteSlash.png" />
     <Content Include="payWebService.asmx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
