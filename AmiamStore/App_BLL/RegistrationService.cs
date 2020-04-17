@@ -19,7 +19,7 @@ namespace AmiamStore.App_BLL
             if(!_usersRepository.IfUserNameExcist(user))
             {
                 _usersRepository.Insert(user);
-                customer.UserID = _usersService.GetUserIdByUserName(user.Username);
+                customer.UserID = _usersService.GetUserIdByUserName(user.Email);
                 _customersRepository.Insert(customer);
             }
             else

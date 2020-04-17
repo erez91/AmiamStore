@@ -21,7 +21,7 @@ namespace AmiamStore.App_BLL
             foreach (DataRow dr in dt.Rows)
             {
                 User d = new User();
-                d.Username = dr["UserName"].ToString();
+                d.Email = dr["UserName"].ToString();
                 d.Password = dr["Password"].ToString();
                 d.UserType = (int)dr["UserType"];
                 listUsers.Add(d);
@@ -49,7 +49,7 @@ namespace AmiamStore.App_BLL
             var users = GetUsers();
             try
             {
-                return users.Single(u => u.Username == userName && u.Password == password);
+                return users.Single(u => u.Email == userName && u.Password == password);
             }
             catch
             {

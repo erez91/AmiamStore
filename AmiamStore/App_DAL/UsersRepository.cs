@@ -30,7 +30,7 @@ namespace AmiamStore.App_DAL
         public void Insert(User user)
         {
             var query = string.Format(@"INSERT INTO Users (UserName, [Password], UserType) VALUES ('{0}','{1}',{2});",
-                user.Username, user.Password, user.UserType
+                user.Email, user.Password, user.UserType
                 );
             _dbHeloer.ExecuteNonQuery(query);
         }
@@ -40,10 +40,26 @@ namespace AmiamStore.App_DAL
             DataTable dt = GetUserNameOfUsers();
             foreach(DataRow dr in dt.Rows)
             {
-                if (dr["UserName"].ToString() == user.Username)
+                if (dr["UserName"].ToString() == user.Email)
                     b = true;//השם משתמש קיים במסד נתונים
             }
             return b;
+        }
+        public User GetUserByUserName(string token)
+        {
+            bool b = false;
+            User user = new User();
+            DataTable dt = GetUsers();
+            foreach (DataRow dr in dt.Rows)
+            {
+                if (dr["UserName"].ToString() == token)
+                {
+                    user.Email = token;
+                    user.Password = dr["Password"].ToString();
+                    user.UserType = (int)dr["UserType"];
+                }
+            }
+            return user;
         }
     }
 }

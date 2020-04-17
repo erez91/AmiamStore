@@ -36,7 +36,39 @@
     position: relative;
     display: flex;
 }
+.Input{
+    width:90px;
+}
+.wrapFooter {
+    position: absolute;
+    left: 35%;
+}
+.FormButton {
+    margin-right: 2%;
+    width: 40px;
+    background: #0066A2;
+    border-style: outset;
+    border-color: #0066A2;
+    height: 50px;
+    width: 100px;
+    font: bold 15px arial, sans-serif;
+    text-shadow: none;
+    margin-top: 8%;
+}
+.FormButton:hover{
+    color:white;
+ transition-duration: 0.4s;
 
+}
+.FooterInput {
+    width: 100%;
+    border: 3px solid blue;
+    padding: 5px;
+    border-radius: 5px 0 0 5px;
+    outline: none;
+    color: blue;
+    margin-top:8%;
+}
 .searchTerm {
     width: 100%;
     border: 3px solid blue;
@@ -70,21 +102,26 @@
     left: 35%;
     transform: translate(-50%, -50%);
 }
-.RegisterIcon{color:black;margin-left:10px;}
+.textFooter {
+    font: bold 15px arial, sans-serif;
+}
+.RegisterIcon {
+    color: black;
+    margin-left: 10px;
+}
 .CompanyDetails {
     float: left;
-    margin-top: -8%;
     font-size: 20px;
-    margin-left: 150px;
+    margin-left: 40%;
+    margin-top: 1%;
 }
 .formBox{
     margin-top:3%;
     margin-left:20%;
 }
 .footer {
-    width: 1170px;
+    width: 1500px;
     height: 500px;
-    margin-left: 33%;
 }
 .inputFooter {
     width: 180px;
@@ -92,8 +129,14 @@
     margin-left:10px;
     direction:rtl;
 }
-.FooterForm{
-    margin-top:10%;
+.PaymentsIcon{
+   float:left;
+   margin-top:16%;
+   margin-left:-15%;
+}
+.FooterForm {
+    margin-top: 3%;
+    float: right;
 }
 .butFooter {
     background: #B9DFFF;
@@ -127,9 +170,6 @@
     color:blue;
 }
 .detailsFooter{margin-top:-3%}
-.CompanyDetails{
-    margin-left:-3%;
-}
 .RenderBody {
     background-color: #f4f4f4;
 }

@@ -1,0 +1,8 @@
+﻿
+@{
+    ViewBag.Title = "UserNameError";
+    Layout = "~/Views/Share/MasterPage.cshtml";
+}
+<h2 class="PaymetFailedMessage">The UserName have been taken. please try again.</h2>
+<input class="ButPay" type="button" value="לחזרה להרשמה" onclick="location.href='@Url.Action("Register", "Register")'" />
+
