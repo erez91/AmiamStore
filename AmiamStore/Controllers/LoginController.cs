@@ -34,7 +34,7 @@ namespace AmiamStore.Controllers
             try
             {
                 var user = _loginService.GetSingleUser(model.UserName, model.Password);
-                AuthenticationManager.SaveUser(user.Username, model.Password, user.UserType, user.UserID);
+                AuthenticationManager.SaveUser(user.Email, model.Password, user.UserType);
                 return RedirectToAction("Index", "Home");
             }
             catch

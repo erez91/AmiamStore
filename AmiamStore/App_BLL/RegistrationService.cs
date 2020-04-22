@@ -1,12 +1,10 @@
 ﻿using AmiamStore.App_BLL.Entities;
 using AmiamStore.App_DAL;
-using AmiamStore.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Web;
-using System.Web.Mvc;
 
 namespace AmiamStore.App_BLL
 {
@@ -21,7 +19,7 @@ namespace AmiamStore.App_BLL
             if(!_usersRepository.IfUserNameExcist(user))
             {
                 _usersRepository.Insert(user);
-                customer.UserID = _usersService.GetUserIdByUserName(user.Username);
+                customer.UserID = _usersService.GetUserIdByUserName(user.Email);
                 _customersRepository.Insert(customer);
             }
             else

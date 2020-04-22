@@ -36,7 +36,40 @@
     position: relative;
     display: flex;
 }
+.Input{
+    width:90px;
+}
+.wrapFooter {
+    position: absolute;
+    left: 53%;
+    margin-top:-3%;
+}
+.FormButton {
+    margin-right: 2%;
+    width: 40px;
+    background: #0066A2;
+    border-style: outset;
+    border-color: #0066A2;
+    height: 50px;
+    width: 100px;
+    font: bold 15px arial, sans-serif;
+    text-shadow: none;
+    margin-top: 8%;
+}
+.FormButton:hover{
+    color:white;
+ transition-duration: 0.4s;
 
+}
+.FooterInput {
+    width: 100%;
+    border: 3px solid blue;
+    padding: 5px;
+    border-radius: 5px 0 0 5px;
+    outline: none;
+    color: blue;
+    margin-top:8%;
+}
 .searchTerm {
     width: 100%;
     border: 3px solid blue;
@@ -48,7 +81,7 @@
 }
 
     .searchTerm:focus {
-        color: #00B4CC;
+        color:black;
     }
 
 .searchButton {
@@ -70,21 +103,27 @@
     left: 35%;
     transform: translate(-50%, -50%);
 }
-.RegisterIcon{color:black;margin-left:10px;}
+.textFooter {
+    font: bold 15px arial, sans-serif;
+}
+.RegisterIcon {
+    color: black;
+    margin-left: 10px;
+}
 .CompanyDetails {
     float: left;
-    margin-top: -8%;
     font-size: 20px;
-    margin-left: 150px;
+    margin-left: 33%;
+    margin-top: 1%;
+    display:inline-block;
 }
 .formBox{
     margin-top:3%;
     margin-left:20%;
 }
 .footer {
-    width: 1170px;
+    width: 1800px;
     height: 500px;
-    margin-left: 33%;
 }
 .inputFooter {
     width: 180px;
@@ -92,8 +131,23 @@
     margin-left:10px;
     direction:rtl;
 }
-.FooterForm{
-    margin-top:10%;
+.PaymentsIcon{
+   float:left;
+   margin-top:12%;
+   margin-left:-15%;
+}
+/*.FooterForm {
+    margin-top: 6%;
+    float:right;
+    width:500px;
+    display:inline-block;
+    margin-left:5%;
+}*/
+.LoginRegBut {
+    width:300px;
+    display:inline-block;
+    margin-top: 5%;
+    margin-left:-24%;
 }
 .butFooter {
     background: #B9DFFF;
@@ -127,9 +181,6 @@
     color:blue;
 }
 .detailsFooter{margin-top:-3%}
-.CompanyDetails{
-    margin-left:-3%;
-}
 .RenderBody {
     background-color: #f4f4f4;
 }
@@ -147,4 +198,43 @@
 }
 .FormButtons {
     display: inline-block;
+}
+.SlashImage{
+    display:inline-block;
+    width:100px;
+    height:50px;
+}
+.Index {
+    font-size: 40px;
+    text-decoration: none;
+    font-family: Kommissar;
+    font-weight:900;
+    margin-left: 0.4%;
+    color: blue;
+    margin-right:3%;
+}
+    .Index:hover {
+        text-decoration: underline #eee
+    }
+.footerLinks{
+    margin-top:3%;
+    margin-bottom:3%;
+    direction:rtl;
+}
+.Icon {
+    font-size: 40px;
+    text-decoration: none;
+    font-family: Kommissar;
+    font-weight: 900;
+    margin-right: 1%;
+    color: blue;
+}
+.Icon:hover {
+        text-decoration: underline #eee;
+}
+.spanFooter1 {
+    color: #c3c5c8;
+    float:left;
+    margin-top:0.8%;
+    margin-left:15%;
 }

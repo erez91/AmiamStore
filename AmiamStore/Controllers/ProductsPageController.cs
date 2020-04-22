@@ -16,7 +16,6 @@ namespace AmiamStore.Controllers
         private ProductsPageBLL _productsService = new ProductsPageBLL();
 
         private string strCart = "Cart";
-
         [HttpGet]
         public ActionResult ProductsSearchPage(string productName)
         {
@@ -30,7 +29,7 @@ namespace AmiamStore.Controllers
             {
                 AddProductToCart(productId.Value);
             }
-            var products = _productsService.GetProductsByCata(id);
+            var products = _productsService.GetProductsByCata(1);
             ProductsPageModel model = GetModel(products.Products);
             return View(model);
         }
@@ -79,8 +78,7 @@ namespace AmiamStore.Controllers
             model.Products = new List<ProductModel>();
             foreach (var product in products)
             {
-                CDescrip = product.CatagoryDescription;
-                model.Products.Add(new ProductModel() { ProductID = product.ProductID, ProductName = product.ProductName, ProductImage = product.ProductImage, ProductPrice = product.ProductPrice , CatagoryDescription = product.CatagoryDescription, CategoryId = product.CategoryId});
+                model.Products.Add(new ProductModel() { ProductID = product.ProductID, ProductName = product.ProductName, ProductImage = product.ProductImage, ProductPrice = product.ProductPrice});
             }
             model.CatagoryDescription = CDescrip;
             return model;

@@ -35,6 +35,12 @@
             }
         }
         
+        @if(Model.Products.Count == 0)
+        {
+        <h1>
+            .לא נמצאו מוצרים התואמים את בחירתך
+        </h1>
+        }
         @for(var i=0;i<productsByPage.Count;i++)
          {
                 var page = productsByPage[i];
@@ -58,7 +64,7 @@
                 </div>*@
                     <i class="fas fa-shopping-bag"></i>
                     <span class="text">
-                        @Html.ActionLink("הוספה לסל", "ProductsPage", "ProductsPage", new { id = product.CategoryId, productId = product.ProductID }, new { @class = "my-class" })
+                        @Html.ActionLink("הוספה לסל", "ProductsPage", "ProductsPage", new { id = 1, productId = product.ProductID }, new { @class = "my-class" })
                     </span>
                     <br />
 

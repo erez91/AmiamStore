@@ -6,16 +6,16 @@ using System.Web.SessionState;
 
 namespace AmiamStore.App_BLL
 {
-    public class AthenticationManager
+    public class AuthenticationManager
     {
-        public void SaveUser(string Email,string password, UserType userType , int? UserID)
+        public void SaveUser(string userName,string password, UserType userType)
         {
-            var currentUser = new CurrentUser(Email,userType,UserID, password);
+            var currentUser = new CurrentUser(userName, userType);
             SetSession("currentUser",currentUser);
         }
-        public void SaveUser(string Email, string password , int userType, int? UserID)
+        public void SaveUser(string userName, string password , int userType)
         {
-            SaveUser(Email,password,(UserType)userType, UserID);
+            SaveUser(userName,password, (UserType)userType);
         }
 
         public CurrentUser GetUser()
@@ -43,17 +43,14 @@ namespace AmiamStore.App_BLL
 
     public class CurrentUser
     {
-        public string Email { get; set; }
+        public string UserName { get; set; }
         public UserType UserType { get; set; }
         public string Password { get; set; }
-        public int? UserID { get; set; }
 
-        public CurrentUser(string Email, UserType userType, int? UserID, string pass)
+        public CurrentUser(string userName, UserType userType)
         {
-            this.Email = Email;
-            this.UserID = UserID;
-            this.UserType = userType;
-            this.Password = pass;
+            UserName = userName;
+            UserType = userType;
         }
     }
 

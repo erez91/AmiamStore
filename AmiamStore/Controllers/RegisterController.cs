@@ -7,6 +7,8 @@ using System.Web.Mvc;
 using AmiamStore.Models;
 using AmiamStore.App_BLL;
 using AmiamStore.App_BLL.Entities;
+using System.Net.Mail;
+using System.Net;
 
 namespace AmiamStore.Controllers
 {
@@ -29,16 +31,14 @@ namespace AmiamStore.Controllers
             {
                 return View(model);
             }
-
             try
             {
                 User user = new User()
                 {
-                    Username = model.Email,
+                    Email = model.Email,
                     Password = model.Password,
                     UserType = (int)UserType.Client
                 };
-
                 Customer customer = new Customer()
                 {
                     CustomerCompanyName = model.CompanyName,
@@ -47,18 +47,19 @@ namespace AmiamStore.Controllers
                     CustomerPhone = model.Phone,
                     CustomerID = model.CustomerID
                 };
+                 
                 _registrationService.Register(user, customer);
                 return RedirectToAction("LoginPage", "Login");
             }
             catch (Exception e)
             {
-                return View("../Error/UserNameError");
+                return RedirectToAction("UserNameError", "Register");
             }
+        }
 
-
-
-
-
+        public ActionResult UserNameError()
+        {
+            return View();
         }
     }
 }

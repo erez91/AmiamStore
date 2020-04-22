@@ -20,12 +20,6 @@ namespace AmiamStore.App_DAL
                 _dbHelper.ExecuteNonQuery(query);
             }
         }
-        public int GetLastOrderID()
-        {
-            var query = string.Format(@"SELECT Max(OrderID) AS MaxOrder
-                                        FROM   Orders;");
-           DataTable dt =  _dbHelper.GetData(query);
-            return (int)dt.Rows[0].ItemArray[0];
-        }
+
     }
 }

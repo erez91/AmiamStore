@@ -1,5 +1,4 @@
 ﻿using AmiamStore.App_BLL;
-using AmiamStore.App_BLL.Entities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -35,8 +34,8 @@ namespace AmiamStore.Models
         [Required(ErrorMessage = "Expiry Date is mandatory.")]
         public string ExpiryDate { get; set; }
         //public int UserID { get; set; }
-        public int OrderID { get; set; }
-        public int CustomerID { get; set; }
+        public int LineOfBalance { get; set; }
+
         public List<CartModel> Products { get; set; }
 
     }

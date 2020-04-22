@@ -8,6 +8,8 @@ using AmiamStore.App_DAL;
 using System.Data;
 using AmiamStore.Models;
 using System.Web.UI.WebControls;
+using System.Web.UI;
+using System.Text;
 
 namespace AmiamStore.Controllers
 {
@@ -15,7 +17,6 @@ namespace AmiamStore.Controllers
     {
         public ShareController() : base(false) { }
         // GET: Share
-        [HttpGet]
         public ActionResult SearchBox()
         {
             return View();
@@ -37,7 +38,17 @@ namespace AmiamStore.Controllers
             }
             return productsSerch;
         }
-
+        public ActionResult FormFooter()
+        {
+            return View();
+        }
+        [HttpGet]
+        public ActionResult FormFooterPage(string PotionalCustomerPhone)
+        {
+            CustomersRepository c = new CustomersRepository();
+            c.InsertPotinoalCustomers(PotionalCustomerPhone);
+            return RedirectToAction("Index", "Home");
+        }
         //[HttpGet]
         //public ActionResult SerchTable(string ProductName)
         //{

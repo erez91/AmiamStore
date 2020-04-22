@@ -16,11 +16,10 @@ namespace AmiamStore.App_BLL
         public ProductsPageModel GetProductsByCata(int catagoryID)
         {
             ProductsPageDAL dal = new ProductsPageDAL();
-            DataTable dt = dal.getProductByCatagorie(catagoryID);
+            DataTable dt = dal.getProductByCatagorie(1);
 
             // converting from a DataTable to a Product Object!
             ProductsPageModel d = new ProductsPageModel();
-            string CDescription = "";
             List<ProductModel> products = new List<ProductModel>();
             foreach (DataRow dr in dt.Rows)
             {
@@ -31,15 +30,9 @@ namespace AmiamStore.App_BLL
                 product.ProductPrice = (int)dr["ProductPrice"];
                 product.ShipperID = dr["ShipperID"].ToString();
                 product.ProductDescription = dr["ProductDescription"].ToString();
-                product.CategoryId = catagoryID;
                 products.Add(product);
-                product.CatagoryDescription = dr["CatagoryDescription"].ToString();
-                product.CatagoryName = dr["CatagoryName"].ToString();
-                CDescription = product.CatagoryDescription;
-
             }
             d.Products = products;
-            d.CatagoryDescription = CDescription;
             return d;
         }
 
@@ -85,7 +78,6 @@ namespace AmiamStore.App_BLL
                 product.ProductImage = dr["ProductImage"].ToString();
                 product.ProductPrice = (int)dr["ProductPrice"];
                 product.ProductDescription = dr["ProductDescription"].ToString();
-                product.CatagoryName = dr["CatagoryName"].ToString();
                 products.Add(product);
             }
             d.Products = products;

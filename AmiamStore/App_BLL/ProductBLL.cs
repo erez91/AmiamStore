@@ -25,8 +25,6 @@ namespace AmiamStore.App_BLL
                 prod.ProductImage = dr["ProductImage"].ToString();
                 prod.ProductPrice = (int)dr["ProductPrice"];
                 prod.ProductDescription = dr["ProductDescription"].ToString();
-                prod.CatagoryName = dr["CatagoryName"].ToString();
-                prod.CategoryId = (int)dr["CatagoryId"];
             }
             return prod;
         }
@@ -47,8 +45,6 @@ namespace AmiamStore.App_BLL
                 product.ProductImage = dr["ProductImage"].ToString();
                 product.ProductPrice = (int)dr["ProductPrice"];
                 product.ProductDescription = dr["ProductDescription"].ToString();
-                product.CatagoryName = dr["CatagoryName"].ToString();
-                product.CategoryId = (int)dr["CatagoryId"];
                 products.Add(product);
             }
             prod.Products = products;

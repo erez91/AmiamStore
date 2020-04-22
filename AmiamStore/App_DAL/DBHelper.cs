@@ -11,13 +11,11 @@ namespace AmiamStore.App_DAL
     {
         private readonly string _connectionString;
 
-        public DBHelper()
+        public DBHelper(string dataBaseName= "AmiamStore.accdb")
         {
             string connString = ConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString;
-            connString += HttpContext.Current.Server.MapPath(@"~/App_Data/AmiamStore.accdb");
+            connString += HttpContext.Current.Server.MapPath($"~/App_Data/{dataBaseName}");
             _connectionString = connString;
-
-
         }
 
         public void ExecuteNonQuery(string query)

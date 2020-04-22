@@ -12,8 +12,8 @@ namespace AmiamStore.Controllers.BaseControllers
         private readonly bool _requireAuthentication;
         private readonly UserType? _userType = null;
 
-        private readonly AthenticationManager _authenticationManager = new AthenticationManager();
-        protected AthenticationManager AuthenticationManager
+        private readonly AuthenticationManager _authenticationManager = new AuthenticationManager();
+        protected AuthenticationManager AuthenticationManager
         {
             get
             {

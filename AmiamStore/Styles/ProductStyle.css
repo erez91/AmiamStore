@@ -58,23 +58,16 @@
 }
 .Product {
     display: inline-block;
-    width: 300px;
+    width: 211px;
     background-color: white;
     margin-left: 5%;
     height: 357px;
 }
-.ShoppingBut {
-    transition-duration: 0.4s;
-    border-radius: 50%;
-    width: 100px;
-    height: 50px;
-    text-decoration: none;
-    color: black;
-}
+
 .Product:hover {
-    -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
-    -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
-    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+        -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+        -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+        box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
 }
 .boxProduct{
     margin-top:5%;

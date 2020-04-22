@@ -39,6 +39,12 @@ namespace AmiamStore.App_DAL
                 );
             _dbHeloer.ExecuteNonQuery(query);
         }
-
+        public void InsertPotinoalCustomers(string Phone)
+        {
+            var query = string.Format(@"INSERT INTO PotentialCustomers (PhoneNumber) VALUES ('{0}')",
+               Phone
+                );
+            _dbHeloer.ExecuteNonQuery(query);
+        }
     }
 }

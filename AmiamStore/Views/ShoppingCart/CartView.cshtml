@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css">
 <link rel="stylesheet" href="styles.css">
 
-@{ var currentUser = Html.GetCurrentUser();}
+@{ var currentUser = Html.GetCurrentUser(); }
 @if (currentUser == null)
 {
     <div class="Box">
@@ -57,8 +57,8 @@ else
         </table>
 
     </form>
-                        if (Model.OrderAmount != 0)
-                        {
+    if (Model.OrderAmount != 0)
+    {
         <div class="wrapper">
             <div class="payment">
                 <div class="payment-logo">
@@ -68,7 +68,6 @@ else
                 <h2>Payment Gateway</h2>
                 @using (Html.BeginForm())
                 {
-                    @*@Html.HiddenFor(item => item.Customer.CustomerID = Html.GetCustomerID())*@
                     <div class="form">
                         <div class="card space icon-relative">
                             <label class="label">Card holder:</label>
@@ -108,14 +107,17 @@ else
                             this.parentNode.parentNode.submit();
                         });
                     </script>
-
                 }
             </div>
         </div>
-                            }
-                        }
+       
 
-        <div class="lineMaster">
-            <img class="imageLogo" src="~/Images/footer-logoWhite.png" />
-        </div>
+
+
+    }
+}
+
+<div class="lineMaster">
+    <img class="imageLogo" src="~/Images/footer-logoWhite.png" />
+</div>
 

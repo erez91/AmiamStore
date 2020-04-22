@@ -15,15 +15,15 @@ namespace AmiamStore.App_DAL
         public DataTable GetPayment()
         {
             string sql =
-             @"SELECT Payment.ExpiryDate, Payment.HolderName, Payment.CVV, Payment.CreditCardNumber, Payment.OrderID, Payment.CustomerID
-               FROM   Payment;";
+             @" SELECT Payment.CreditCardNumber, Payment.CVV, Payment.ID, Payment.HolderName,Payment.ExpiryDate
+                   FROM  Payment";
             DataTable dt = _dbHelper.GetData(sql);
             return dt;
         }
         public void Insert(CartViewModel paymentMethood)
         {
-            var query = string.Format(@"INSERT INTO Payment (CustomerID , OrderID , CreditCardNumber, CVV , HolderName, ExpiryDate) VALUES ('{0}','{1}','{2}', '{3}' , '{4}' , '{5}');",
-             paymentMethood.CustomerID , paymentMethood.OrderID , paymentMethood.CreditCardNumber, paymentMethood.Cvv, paymentMethood.CardHolder, paymentMethood.ExpiryDate
+            var query = string.Format(@"INSERT INTO Payment (CreditCardNumber, CVV , HolderName, ExpiryDate) VALUES ('{0}','{1}','{2}', '{3}');",
+                paymentMethood.CreditCardNumber, paymentMethood.Cvv, paymentMethood.CardHolder, paymentMethood.ExpiryDate
                 );
             _dbHelper.ExecuteNonQuery(query);
         }

@@ -1,0 +1,17 @@
+﻿@model AmiamStore.Models.ProductsPageModel
+
+@{
+    var message = TempData["AlertMessage"] ?? string.Empty;
+}
+<div class="FooterForm">
+    @using (Html.BeginForm("FormFooterPage", "Share", FormMethod.Get, new { }))
+    {
+    <div class="wrapFooter">
+        <div class="textFooter">!השאר לנו את מספר הטלפון שלך ונחזור אלייך בהקדם</div>
+        <div class="search">
+            <button type="submit" class="FormButton" style="text-decoration:none">שלח</button>
+            @Html.TextBoxFor(m => m.PotionalCustomerPhone, new { @class = "FooterInput", placeholder = "טלפון", data_mask = "000-00-00-000" })
+        </div>
+    </div>
+    }
+</div>

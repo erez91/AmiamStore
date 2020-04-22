@@ -64,31 +64,35 @@
         @RenderBody()
     </div>
     <footer class="footer">
-        <div class="detailsFooter">
-            <div class="FooterForm">
-                <form action="../Login/LoginPage" class="FormButtons">
-                    <input class="LoginButtonFoo" type="submit" value="התחבר לאתר" />
-                </form>               
-                <form action="../Register/Register" class="FormButtons">
-                    <input class="RegisterButtonFoo" type="submit" value="הירשם לאתר" />
-                </form>         
-            </div>
-
-            <div class="CompanyDetails">
-
-                <span class="blueWord"> להצעת מחיר</span>
-                <br />
-                מחירים מיוחדים
-                <br />
-                למכירה סיטונאית
-                <br />
-                יריב 054-7788-383
-                <br />
-                ליבנת 054-7788-381
-                <br />
-                amiam1@inter.net.il
-            </div>
+        <div class="CompanyDetails">
+            <span class="blueWord"> להצעת מחיר</span>
+            <br />
+            מחירים מיוחדים
+            <br />
+            למכירה סיטונאית
+            <br />
+            יריב 054-7788-383
+            <br />
+            ליבנת 054-7788-381
+            <br />
+            amiam1@inter.net.il
+            <br />
+            <br />
+            Liam Ivgi 2020      ©
         </div>
+        <span class="PaymentsIcon">
+            <img src="~/Images/payment-icons.png" />
+        </span>
+        <div class="LoginRegBut">
+            <form action="../Login/LoginPage" class="FormButtons">
+                <input class="LoginButtonFoo" type="submit" value="התחבר לאתר" />
+            </form>
+            <form action="../Register/Register" class="FormButtons">
+                <input class="RegisterButtonFoo" type="submit" value="הירשם לאתר" />
+            </form>
+        </div>
+        @Html.Action("FormFooter", "Share")
+
     </footer>
 </body>
 </html>
