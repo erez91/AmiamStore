@@ -41,7 +41,8 @@
 }
 .wrapFooter {
     position: absolute;
-    left: 35%;
+    left: 53%;
+    margin-top:-3%;
 }
 .FormButton {
     margin-right: 2%;
@@ -80,7 +81,7 @@
 }
 
     .searchTerm:focus {
-        color: #00B4CC;
+        color:black;
     }
 
 .searchButton {
@@ -112,15 +113,16 @@
 .CompanyDetails {
     float: left;
     font-size: 20px;
-    margin-left: 40%;
+    margin-left: 33%;
     margin-top: 1%;
+    display:inline-block;
 }
 .formBox{
     margin-top:3%;
     margin-left:20%;
 }
 .footer {
-    width: 1500px;
+    width: 1800px;
     height: 500px;
 }
 .inputFooter {
@@ -131,12 +133,21 @@
 }
 .PaymentsIcon{
    float:left;
-   margin-top:16%;
+   margin-top:12%;
    margin-left:-15%;
 }
-.FooterForm {
-    margin-top: 3%;
-    float: right;
+/*.FooterForm {
+    margin-top: 6%;
+    float:right;
+    width:500px;
+    display:inline-block;
+    margin-left:5%;
+}*/
+.LoginRegBut {
+    width:300px;
+    display:inline-block;
+    margin-top: 5%;
+    margin-left:-24%;
 }
 .butFooter {
     background: #B9DFFF;

@@ -14,7 +14,9 @@
     margin-bottom: 3%;
     margin-top: -3%;
 }
-
+.paypalButton {
+    margin-top:2%;
+}
 .imageLogo {
     margin-bottom: -1.2%;
 }

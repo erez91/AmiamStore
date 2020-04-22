@@ -80,11 +80,10 @@
             <br />
             Liam Ivgi 2020      ©
         </div>
-        @Html.Action("FormFooter","Share")
         <span class="PaymentsIcon">
             <img src="~/Images/payment-icons.png" />
         </span>
-        <div class="FooterForm">
+        <div class="LoginRegBut">
             <form action="../Login/LoginPage" class="FormButtons">
                 <input class="LoginButtonFoo" type="submit" value="התחבר לאתר" />
             </form>
@@ -92,6 +91,8 @@
                 <input class="RegisterButtonFoo" type="submit" value="הירשם לאתר" />
             </form>
         </div>
+        @Html.Action("FormFooter", "Share")
+
     </footer>
 </body>
 </html>

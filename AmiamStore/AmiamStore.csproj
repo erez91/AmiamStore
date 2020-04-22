@@ -260,7 +260,6 @@
     </Compile>
     <Compile Include="Controllers\BaseControllers\BaseController.cs" />
     <Compile Include="Controllers\ContactUsController.cs" />
-    <Compile Include="Controllers\EmailServiceController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />

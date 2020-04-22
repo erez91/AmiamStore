@@ -35,6 +35,12 @@
             }
         }
         
+        @if(Model.Products.Count == 0)
+        {
+        <h1>
+            .לא נמצאו מוצרים התואמים את בחירתך
+        </h1>
+        }
         @for(var i=0;i<productsByPage.Count;i++)
          {
                 var page = productsByPage[i];
