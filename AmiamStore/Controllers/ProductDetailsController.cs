@@ -14,6 +14,7 @@ namespace AmiamStore.Controllers
         {
             ProductBLL bll = new ProductBLL();
             ProductsPageModel prod = bll.getProductById(id);
+            prod.Products = bll.CommonProductsId(id);
             ViewBag.Message = prod;
             return View(prod);
         }

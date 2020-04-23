@@ -16,7 +16,7 @@ namespace AmiamStore.App_BLL
         public ProductsPageModel GetProductsByCata(int catagoryID)
         {
             ProductsPageDAL dal = new ProductsPageDAL();
-            DataTable dt = dal.getProductByCatagorie(1);
+            DataTable dt = dal.getProducts();
 
             // converting from a DataTable to a Product Object!
             ProductsPageModel d = new ProductsPageModel();
@@ -28,7 +28,6 @@ namespace AmiamStore.App_BLL
                 product.ProductName = dr["ProductName"].ToString();
                 product.ProductImage = dr["ProductImage"].ToString();
                 product.ProductPrice = (int)dr["ProductPrice"];
-                product.ShipperID = dr["ShipperID"].ToString();
                 product.ProductDescription = dr["ProductDescription"].ToString();
                 products.Add(product);
             }

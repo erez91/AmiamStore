@@ -50,5 +50,47 @@ namespace AmiamStore.App_BLL
             prod.Products = products;
             return prod;
         }
+        private int[] RandomArr(int CurrentId)
+        {
+            Random rng = new Random();
+            int smallestNumber = 1;
+            int biggestNumber = 30;
+
+            //Determine the amount of random numbers
+            int amountOfRandomNumbers = 4;
+
+            //Create a list of numbers from which the routine
+            //shall choose the result numbers
+            var possibleNumbers = new List<int>();
+            for (int i = smallestNumber; i <= biggestNumber; i++)
+                possibleNumbers.Add(i);
+
+            var result = new List<int>();
+
+            //Initialize a random number generator
+            Random rand = new Random();
+
+            //For-loop which picks each round a unique random number
+            for (int i = 0; i < amountOfRandomNumbers; i++)
+            {
+                //Generate random number
+                int randomNumber = rand.Next(1, possibleNumbers.Count) - 1;
+                result.Add(possibleNumbers[randomNumber]);
+                //Remove the chosen result number from possible numbers list
+                possibleNumbers.RemoveAt(randomNumber);
+            }
+           return result.ToArray();
+        }
+        public List<ProductModel> CommonProductsId(int currentId)
+        {
+            int[] arr = RandomArr(currentId);
+            List<ProductModel> model = new List<ProductModel>();
+            for(int i = 0;i<=3;i++)
+            {
+                model.Add(getProduct(arr[i]));
+            }
+            return model;
+
+        }
     }
 }

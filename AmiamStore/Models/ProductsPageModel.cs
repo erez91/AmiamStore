@@ -13,5 +13,6 @@ namespace AmiamStore.Models
         public string PotionalCustomerName { get; set; }
         public string PotionalCustomerCompany { get; set; }
         public string PotionalCustomerPhone { get; set; }
+        public List<ProductModel> CommonProducts { get; set; }
     }
 }

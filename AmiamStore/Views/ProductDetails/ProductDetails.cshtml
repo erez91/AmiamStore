@@ -87,7 +87,9 @@ else
     </div>
 }
 
-@*<div class="RelatedProducts">
+
+
+<div class="RelatedProducts">
         <div class="RelatedProductsLine">
             <h3 class="RelatedProductsTitle">
                 :מוצרים קשורים
@@ -95,113 +97,89 @@ else
         </div>
         <div class="Product">
             <a href="../ProductPage/LuminousCoatPage">
-                <img class="img" src="~/Images/SafteyProductsImages/LuminousCoatHomePage.JPEG" />
+                <img class="img" src="\Images\@Model.Products.First().ProductImage">
             </a>
-            <div class="horizontal_dotted_line"></div>
-            <div class="starRating">
-                <input type="radio" name="star" class="star" /><label class="label" for="star"></label>
-                <input type="radio" name="star" class="star" /><label class="label" for="star2"></label>
-                <input type="radio" name="star" class="star" /><label class="label" for="star3"></label>
-                <input type="radio" name="star" class="star" /><label class="label" for="star4"></label>
-                <input type="radio" name="star" class="star" /><label class="label" for="star5"></label>
-
-            </div>
             <div class="ProductTitle">
-                מעיל זוהר
+                @Model.Products.First().ProductName
             </div>
             <br />
             <div class="ProductPrice">
-                ₪280
+                ₪@Model.Products.First().ProductPrice
             </div>
-            <div class="addToShoppingCart">
-                <button class="ShoppingButProduct1">
-                    <i class="fas fa-shopping-bag"></i>
-                    <span class="text">הוספה לסל</span>
-                </button>
-            </div>
+            @*<div class="addToShoppingCart">
+            <button class="ShoppingButProduct1">
+                <i class="fas fa-shopping-bag"></i>
+                <span class="text">הוספה לסל</span>
+            </button>
+        </div>*@
+            <i class="fas fa-shopping-bag"></i>
+            @Html.ActionLink("הוספה לסל", "ProductsPage", "ProductsPage", new { id = 1, productId = @Model.Products.First().ProductID }, new { @class = "ShoppingButProduct1" })
+
         </div>
         <div class="Product">
-            <a href="../ProductPage/ChemicalResistantOverallsPage">
-                <img class="img" src="~/Images/SafteyProductsImages/ChemicalResistantOveralls.jpg" />
+            <a href="../ProductPage/LuminousCoatPage">
+                <img class="img" src="\Images\@Model.Products[1].ProductImage">
             </a>
-            <div class="horizontal_dotted_line"></div>
-            <div class="starRating">
-                <input type="radio" name="star" class="star" /><label class="label" for="star"></label>
-                <input type="radio" name="star" class="star" /><label class="label" for="star2"></label>
-                <input type="radio" name="star" class="star" /><label class="label" for="star3"></label>
-                <input type="radio" name="star" class="star" /><label class="label" for="star4"></label>
-                <input type="radio" name="star" class="star" /><label class="label" for="star5"></label>
-
-            </div>
             <div class="ProductTitle">
-                סרבל עמיד לכימיקלים
+                @Model.Products[1].ProductName
             </div>
             <br />
             <div class="ProductPrice">
-                ₪22
+                ₪@Model.Products[1].ProductPrice
             </div>
-            <div class="addToShoppingCart">
-                <button class="ShoppingButProduct1">
-                    <i class="fas fa-shopping-bag"></i>
-                    <span class="text">הוספה לסל</span>
-                </button>
-            </div>
+            @*<div class="addToShoppingCart">
+            <button class="ShoppingButProduct1">
+                <i class="fas fa-shopping-bag"></i>
+                <span class="text">הוספה לסל</span>
+            </button>
+        </div>*@
+            <i class="fas fa-shopping-bag"></i>
+            @Html.ActionLink("הוספה לסל", "ProductsPage", "ProductsPage", new { id = 1, productId = Model.Products[1].ProductID }, new { @class = "ShoppingButProduct1" })
+
         </div>
         <div class="Product">
-            <a href="../ProductPage/ReflectsTransparentShieldPage">
-                <img class="img" src="~/Images/SafteyProductsImages/ReflectsTransparentShield.jpg" />
+            <a href="../ProductPage/LuminousCoatPage">
+                <img class="img" src="\Images\@Model.Products[2].ProductImage">
             </a>
-            <div class="horizontal_dotted_line"></div>
-            <div class="starRating">
-                <input type="radio" name="star" class="star" /><label class="label" for="star"></label>
-                <input type="radio" name="star" class="star" /><label class="label" for="star2"></label>
-                <input type="radio" name="star" class="star" /><label class="label" for="star3"></label>
-                <input type="radio" name="star" class="star" /><label class="label" for="star4"></label>
-                <input type="radio" name="star" class="star" /><label class="label" for="star5"></label>
-
-            </div>
             <div class="ProductTitle">
-                משקף מגן שקוף
+                @Model.Products[2].ProductName
             </div>
             <br />
             <div class="ProductPrice">
-                ₪25
+                ₪@Model.Products[2].ProductPrice
             </div>
-            <div class="addToShoppingCart">
-                <button class="ShoppingButProduct1">
-                    <i class="fas fa-shopping-bag"></i>
-                    <span class="text">הוספה לסל</span>
-                </button>
-            </div>
+            @*<div class="addToShoppingCart">
+            <button class="ShoppingButProduct1">
+                <i class="fas fa-shopping-bag"></i>
+                <span class="text">הוספה לסל</span>
+            </button>
+        </div>*@
+            <i class="fas fa-shopping-bag"></i>
+            @Html.ActionLink("הוספה לסל", "ProductsPage", "ProductsPage", new { id = 1, productId = @Model.Products[2].ProductID }, new { @class = "ShoppingButProduct1" })
+
         </div>
         <div class="Product">
-            <a href="../ProductPage/DisposableBeardCoverPage">
-                <img class="img" src="~/Images/SafteyProductsImages/DisposableBeardCover.jpg" />
+            <a href="../ProductPage/LuminousCoatPage">
+                <img class="img" src="\Images\@Model.Products[3].ProductImage">
             </a>
-            <div class="horizontal_dotted_line"></div>
-            <div class="starRating">
-                <input type="radio" name="star" class="star" /><label class="label" for="star"></label>
-                <input type="radio" name="star" class="star" /><label class="label" for="star2"></label>
-                <input type="radio" name="star" class="star" /><label class="label" for="star3"></label>
-                <input type="radio" name="star" class="star" /><label class="label" for="star4"></label>
-                <input type="radio" name="star" class="star" /><label class="label" for="star5"></label>
-
-            </div>
             <div class="ProductTitle">
-                כיסוי זקן חד פעמי
+                @Model.Products[3].ProductName
             </div>
             <br />
             <div class="ProductPrice">
-                ₪85
+                ₪@Model.Products[3].ProductPrice
             </div>
-            <div class="addToShoppingCart">
-                <button class="ShoppingButProduct1">
-                    <i class="fas fa-shopping-bag"></i>
-                    <span class="text">הוספה לסל</span>
-                </button>
-            </div>
+            @*<div class="addToShoppingCart">
+            <button class="ShoppingButProduct1">
+                <i class="fas fa-shopping-bag"></i>
+                <span class="text">הוספה לסל</span>
+            </button>
+        </div>*@
+            <i class="fas fa-shopping-bag"></i>
+            @Html.ActionLink("הוספה לסל", "ProductsPage", "ProductsPage", new { id = 1, productId = Model.Products[3].ProductID }, new { @class = "ShoppingButProduct1" })
+
         </div>
-    </div>*@
+    </div>
 <div class="lineMaster">
     <img class="imageLogo" src="~/Images/footer-logoWhite.png" />
 </div>

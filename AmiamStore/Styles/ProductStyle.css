@@ -12,7 +12,18 @@
     padding: 10px;
     cursor: pointer;
 }
+.ShoppingButProduct1 {
+    transition-duration: 0.4s;
+    border-radius: 50%;
+    width: 100px;
+    height: 50px;
+    text-decoration: none;
+    color: black;
+}
+.ShoppingButProduct1:hover{
+        color: red;
 
+}
 .plus {
     width: 120px;
     background-color: #dae2e6;
@@ -85,6 +96,7 @@
 .inputDescription{
     height:220px;
     width:480px;
+    direction:rtl;
 }
 .ProductDetails {
     display: inline-block;
@@ -94,7 +106,7 @@
     margin-top:5%;
 }
 .titleLuminous{
-    font-size:40px;
+    font-size:34px;
     padding-left:50%;
     margin-bottom:3%;
     width:160px;
