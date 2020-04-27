@@ -30,6 +30,7 @@ namespace AmiamStore.Controllers
                 AddProductToCart(productId.Value);
             }
             var products = _productsService.GetProductsByCata(id);
+            TempData["ListProduts"] = products.Products;
             ProductsPageModel model = GetModel(products.Products);
             return View(model);
         }
