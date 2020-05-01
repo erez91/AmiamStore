@@ -42,7 +42,6 @@
 .wrapFooter {
     position: absolute;
     left: 53%;
-    margin-top:-3%;
 }
 .FormButton {
     margin-right: 2%;
@@ -146,7 +145,7 @@
 .LoginRegBut {
     width:300px;
     display:inline-block;
-    margin-top: 5%;
+    margin-top: 3%;
     margin-left:-24%;
 }
 .butFooter {

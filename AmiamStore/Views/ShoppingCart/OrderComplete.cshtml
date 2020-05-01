@@ -4,7 +4,10 @@
     Layout = "~/Views/Share/MasterPage.cshtml";
 }
 <link href="~/Styles/PaymentStyle.css" rel="stylesheet" />
-<h2 class="CompleteOrderTitle">The order was successful, thank you for your purchase. Have a nice day!</h2>
+<h2 class="CompleteOrderTitle">
+    The order was successful, thank you for your purchase,The receipt for the purchase is in your email.
+    Have a nice day!
+</h2>
 <input class="ButPay" type="button" value="לעמוד הבית" onclick="location.href='@Url.Action("Index", "Home")'" />
 <div class="lineMaster">
     <img class="imageLogo" src="~/Images/footer-logoWhite.png" />

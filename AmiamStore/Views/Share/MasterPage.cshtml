@@ -83,14 +83,17 @@
         <span class="PaymentsIcon">
             <img src="~/Images/payment-icons.png" />
         </span>
-        <div class="LoginRegBut">
-            <form action="../Login/LoginPage" class="FormButtons">
-                <input class="LoginButtonFoo" type="submit" value="התחבר לאתר" />
-            </form>
-            <form action="../Register/Register" class="FormButtons">
-                <input class="RegisterButtonFoo" type="submit" value="הירשם לאתר" />
-            </form>
-        </div>
+        @if (currentUser == null)
+        {
+            <div class="LoginRegBut">
+                <form action="../Login/LoginPage" class="FormButtons">
+                    <input class="LoginButtonFoo" type="submit" value="התחבר לאתר" />
+                </form>
+                <form action="../Register/Register" class="FormButtons">
+                    <input class="RegisterButtonFoo" type="submit" value="הירשם לאתר" />
+                </form>
+            </div>
+        }
         @Html.Action("FormFooter", "Share")
 
     </footer>
