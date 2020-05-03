@@ -15,6 +15,8 @@ namespace AmiamStore.Controllers
     public class RegisterController : BaseController
     {
         private readonly RegistrationService _registrationService = new RegistrationService();
+        payWebService paymentWebService = new payWebService();
+
 
         public RegisterController() : base(false) { }
        
@@ -47,8 +49,8 @@ namespace AmiamStore.Controllers
                     CustomerPhone = model.Phone,
                     CustomerID = model.CustomerID
                 };
-                 
                 _registrationService.Register(user, customer);
+                _registrationService.SendEmailRegister(customer.CustomerEmailAdress,customer.CustomerName);
                 return RedirectToAction("LoginPage", "Login");
             }
             catch (Exception e)
